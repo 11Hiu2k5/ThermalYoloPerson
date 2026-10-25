@@ -1,0 +1,11 @@
+# Cấu hình Dataset LLVIP (Visible-Infrared Paired Dataset for Low-light Vision) cho YOLOv8
+# Giám sát người đi bộ ban đêm / thiếu sáng
+
+path: prepared_dataset/llvip
+train: images/train
+val: images/val
+test: images/test
+
+# Lớp đối tượng cần phát hiện: 0 - person
+names:
+  0: person

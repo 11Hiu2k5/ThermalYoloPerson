@@ -1,0 +1,63 @@
+# =====================================================================
+# .gitignore - Thermal YOLO Person Detection Project
+# Tác giả: Nguyễn Đức Hiếu (11Hiu2k5)
+# =====================================================================
+
+# 1. BỘ DỮ LIỆU GỐC & ĐÃ TIỀN XỬ LÝ (LƯU RIÊNG TRÊN GOOGLE DRIVE/COLAB)
+FLIR_ADAS_v2/
+LLVIP/
+prepared_dataset/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# 2. THƯ MỤC HUẤN LUYỆN & LOGS CỦA YOLO
+runs/
+
+# 3. MÔ HÌNH VÀ TRỌNG SỐ LỚN (WEIGHTS)
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# 4. MÔI TRƯỜNG ẢO PYTHON (VIRTUAL ENVIRONMENTS)
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 5. PYTHON BYTECODE & CACHE
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# 6. FILE BÍ MẬT, API KEYS & FILE MÔI TRƯỜNG
+.env
+*.env
+*.env.*
+secrets.toml
+*.pem
+*.key
+*.cert
+credentials.json
+
+# 7. OS & IDE CONFIGURATIONS
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+.~lock.*
+*.log

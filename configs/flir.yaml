@@ -1,0 +1,10 @@
+# Cấu hình Dataset FLIR ADAS v2 cho mô hình YOLOv8
+# Tài liệu tham khảo: FLIR Thermal Dataset (https://www.flir.com/oem/adas/adas-dataset-form/)
+
+path: prepared_dataset/flir
+train: images/train
+val: images/val
+
+# Lớp đối tượng cần phát hiện: 0 - person
+names:
+  0: person
