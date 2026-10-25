@@ -93,7 +93,7 @@ Clone repository về máy tính và cài đặt các thư viện phụ thuộc:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/11Hiu2k5/<TÊN-REPO>.git
+git clone https://github.com/11Hiu2k5/ThermalYoloPerson.git
 cd ThermalYoloPerson
 
 # 2. Tạo môi trường ảo (khuyến nghị)
