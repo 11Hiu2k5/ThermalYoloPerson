@@ -76,8 +76,6 @@ ThermalYoloPerson/
 ├── README.md                               # Tài liệu hướng dẫn sử dụng
 │
 ├── Bao_Cao_De_Tai_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.docx  # Báo cáo đồ án 5 chương
-├── Thuyet_Trinh_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.pptx    # Slide thuyết trình 18 trang
-└── Noi_Dung_Slide_Thuyet_Trinh_YOLO_Anh_Nhiet.docx    # Kịch bản thuyết trình
 ```
 
 ---
