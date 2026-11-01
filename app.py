@@ -31,14 +31,8 @@ from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parent
 
-# Phat hien thiet bi phan cung (CPU vs GPU CUDA)
-DEVICE_CUDA_AVAILABLE = torch.cuda.is_available()
-if DEVICE_CUDA_AVAILABLE:
-    DEVICE_TAG = "0"
-    DEVICE_NAME = f"GPU CUDA ({torch.cuda.get_device_name(0)})"
-else:
-    DEVICE_TAG = "cpu"
-    DEVICE_NAME = "CPU (Intel/AMD - Khong co CUDA)"
+# Suy luận trên CPU để đảm bảo tương thích
+DEVICE_TAG = "cpu"
 
 # Tim kiem bieu tuong ung dung (Favicon / Icon)
 def resolve_asset_path(filename: str) -> Optional[Path]:
@@ -112,16 +106,16 @@ LLVIP_MODEL_PATH = find_model_path([
 
 MODEL_OPTIONS = {}
 if FLIR_MODEL_PATH:
-    MODEL_OPTIONS["YOLOv8n - FLIR Thermal (Giao thông đường phố)"] = FLIR_MODEL_PATH
+    MODEL_OPTIONS["FLIR"] = FLIR_MODEL_PATH
 else:
-    MODEL_OPTIONS["YOLOv8n - FLIR Thermal (Thiếu file)"] = ROOT / "models" / "flir_best.pt"
+    MODEL_OPTIONS["FLIR"] = ROOT / "models" / "flir_best.pt"
 
 if LLVIP_MODEL_PATH:
-    MODEL_OPTIONS["YOLOv8n - LLVIP Thermal (Người đi bộ đêm tối)"] = LLVIP_MODEL_PATH
+    MODEL_OPTIONS["LLVIP"] = LLVIP_MODEL_PATH
 else:
-    MODEL_OPTIONS["YOLOv8n - LLVIP Thermal (Thiếu file)"] = ROOT / "models" / "llvip_best.pt"
+    MODEL_OPTIONS["LLVIP"] = ROOT / "models" / "llvip_best.pt"
 
-COMPARE_OPTION = "So sánh cả hai mô hình (FLIR + LLVIP)"
+COMPARE_OPTION = "So Sánh Cả Hai"
 
 # ==============================================================================
 # 2. CAU HINH TRANG VA GIAO DIEN STREAMLIT (CYBER-THERMAL THEME)
@@ -374,9 +368,7 @@ st.markdown(
             <h1>THERMAL VISION · PHÁT HIỆN NGƯỜI TRONG ẢNH NHIỆT</h1>
             <p>Hệ thống nhận diện người thời gian thực trên cảm biến hồng ngoại sóng dài LWIR (8–14 µm) · YOLOv8n Deep Learning · Bộ dữ liệu FLIR ADAS v2 & LLVIP</p>
             <div>
-                <span class="badge-tag">⚡ Nhận diện tức thì (Zero-Click)</span>
-                <span class="badge-tag badge-cyan">🌈 Hỗ trợ Bảng màu Hiển thị (Inferno/Jet/Ironbow)</span>
-                <span class="badge-tag badge-green">💻 Thiết bị: {DEVICE_NAME}</span>
+                <span class="badge-tag">Mô hình: FLIR · LLVIP · So sánh cả hai</span>
             </div>
         </div>
     </div>
@@ -765,11 +757,6 @@ with st.sidebar:
         help="Bảng màu CHỈ dùng để hiển thị trực quan cho mắt người. YOLO luôn được nạp ảnh grayscale chuẩn hóa để suy luận chính xác.",
     )
 
-    st.divider()
-    st.markdown("### 💻 Thông tin Phần cứng")
-    st.caption(f"Thiết bị: **{DEVICE_NAME}**")
-    st.caption("Sinh viên: **Nguyễn Đức Hiếu** (MSSV: 24800600314)")
-    st.caption("GVHD: **ThS./TS. Vũ Thanh Hiền** · HUTECH 2026")
 
 
 # Tải trước các mô hình đang hoạt động vào bộ nhớ cache
