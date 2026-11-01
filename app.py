@@ -9,6 +9,8 @@ import os
 import sys
 import time
 import hashlib
+import io
+import base64
 from pathlib import Path
 from typing import Dict, List, Tuple, Any, Optional
 
@@ -41,8 +43,10 @@ else:
 # Tim kiem bieu tuong ung dung (Favicon / Icon)
 def resolve_asset_path(filename: str) -> Optional[Path]:
     candidates = [
+        ROOT / "assets" / filename,
         ROOT / filename,
         ROOT / "reports" / "assets" / filename,
+        ROOT.parent / "assets" / filename,
         ROOT.parent / filename,
         ROOT.parent / "reports" / "assets" / filename,
     ]
@@ -51,7 +55,33 @@ def resolve_asset_path(filename: str) -> Optional[Path]:
             return c
     return None
 
-ICON_PATH = resolve_asset_path("thermal_person_icon.png")
+# Import du lieu Base64 de ho tro Zero-Dependency Fallback
+try:
+    from assets.icon_data import ICON_PNG_B64, ICON_SVG_B64
+except Exception:
+    # Fallback truc tiep neu khong tim thay file icon_data.py
+    ICON_PNG_B64 = ""
+    ICON_SVG_B64 = ""
+
+def get_app_icon_image() -> Any:
+    """Tra ve doi tuong PIL Image cho page_icon cua Streamlit voi co che tu dong fallback."""
+    icon_file = resolve_asset_path("thermal_yolo_icon_256.png") or resolve_asset_path("thermal_yolo_icon.png")
+    if icon_file and icon_file.is_file():
+        try:
+            return Image.open(icon_file)
+        except Exception:
+            pass
+    if ICON_PNG_B64:
+        try:
+            return Image.open(io.BytesIO(base64.b64decode(ICON_PNG_B64)))
+        except Exception:
+            pass
+    return "🔥"
+
+APP_ICON_IMAGE = get_app_icon_image()
+APP_ICON_DATA_URI = f"data:image/png;base64,{ICON_PNG_B64}" if ICON_PNG_B64 else ""
+
+ICON_PATH = resolve_asset_path("thermal_yolo_icon.png") or resolve_asset_path("thermal_person_icon.png")
 
 # Tim thu muc samples va anh mau
 SAMPLES_DIR = ROOT / "samples"
@@ -99,7 +129,7 @@ COMPARE_OPTION = "So sánh cả hai mô hình (FLIR + LLVIP)"
 
 st.set_page_config(
     page_title="Thermal Vision · Phát hiện người trong ảnh nhiệt",
-    page_icon=str(ICON_PATH) if (ICON_PATH and ICON_PATH.exists()) else "🔥",
+    page_icon=APP_ICON_IMAGE,
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -147,22 +177,63 @@ st.markdown(
     }
 
     .hero-icon-box {
-        width: 72px;
-        height: 72px;
-        border-radius: 16px;
-        background: radial-gradient(circle, #ea580c 0%, #991b1b 100%);
-        box-shadow: 0 0 25px rgba(234, 88, 12, 0.6);
+        width: 78px;
+        height: 78px;
+        border-radius: 20px;
+        background: transparent;
+        box-shadow: 0 0 25px rgba(255, 106, 0, 0.45);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
         overflow: hidden;
+        border: 1px solid rgba(255, 106, 0, 0.4);
     }
 
     .hero-icon-box img {
-        width: 60px;
-        height: 60px;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        border-radius: 18px;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Sidebar Brand Card */
+    .sidebar-brand-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.75) 100%);
+        border: 1px solid rgba(255, 106, 0, 0.35);
+        border-radius: 14px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 106, 0, 0.15);
+    }
+    .sidebar-brand-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 0 12px rgba(255, 106, 0, 0.4);
+    }
+    .sidebar-brand-text {
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar-brand-title {
+        font-weight: 800;
+        font-size: 15px;
+        color: #f8fafc;
+        letter-spacing: 0.8px;
+        line-height: 1.2;
+    }
+    .sidebar-brand-subtitle {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ff6a00;
+        letter-spacing: 1px;
+        line-height: 1.2;
     }
 
     .hero-content h1 {
@@ -284,13 +355,12 @@ st.markdown(
 )
 
 # Render Header Hero
-icon_html = '<span style="font-size: 38px;">🔥</span>'
+icon_html = f'<img src="{APP_ICON_DATA_URI}" alt="Thermal YOLO Icon" />' if APP_ICON_DATA_URI else '<span style="font-size: 38px;">🔥</span>'
 if ICON_PATH and ICON_PATH.is_file():
-    import base64
     try:
         with open(ICON_PATH, "rb") as f:
             b64_icon = base64.b64encode(f.read()).decode("utf-8")
-            icon_html = f'<img src="data:image/png;base64,{b64_icon}" alt="Thermal Icon" />'
+            icon_html = f'<img src="data:image/png;base64,{b64_icon}" alt="Thermal YOLO Icon" />'
     except Exception:
         pass
 
@@ -599,6 +669,21 @@ def detect_thermal_person_pipeline(
 # ==============================================================================
 
 with st.sidebar:
+    # Logo thương hiệu ứng dụng ở đầu Sidebar
+    if APP_ICON_DATA_URI:
+        st.markdown(
+            f"""
+            <div class="sidebar-brand-card">
+                <img src="{APP_ICON_DATA_URI}" class="sidebar-brand-icon" alt="Thermal YOLO Logo" />
+                <div class="sidebar-brand-text">
+                    <span class="sidebar-brand-title">THERMAL YOLO</span>
+                    <span class="sidebar-brand-subtitle">VISION STUDIO · AI</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     st.markdown("### ⚙️ Cấu hình Mô hình")
 
     model_choices = list(MODEL_OPTIONS.keys()) + [COMPARE_OPTION]

@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#070A10"/>
+    </linearGradient>
+
+    <!-- Outer Rim Glow -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6A00" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#FF3B30" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Thermal Heat Aura (Behind Figure) -->
+    <radialGradient id="thermalAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6A00" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#FF3B30" stop-opacity="0.2"/>
+      <stop offset="75%" stop-color="#9333EA" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Head Thermal Gradient (Hotspot Core) -->
+    <radialGradient id="headThermal" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#FFD54F"/>
+      <stop offset="65%" stop-color="#FF6A00"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </radialGradient>
+
+    <!-- Body Thermal Gradient -->
+    <linearGradient id="bodyThermal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="22%" stop-color="#FF3B30"/>
+      <stop offset="55%" stop-color="#E11D48"/>
+      <stop offset="85%" stop-color="#C026D3"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+
+    <!-- Chest Hotspot Core -->
+    <radialGradient id="chestCore" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#FFD54F" stop-opacity="0.9"/>
+      <stop offset="75%" stop-color="#FF3B30" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF3B30" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- YOLO Badge Gradient -->
+    <linearGradient id="yoloBadge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6A00"/>
+      <stop offset="100%" stop-color="#FF3B30"/>
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Background Squircle Canvas -->
+  <rect x="16" y="16" width="992" height="992" rx="224" fill="url(#bgGrad)" stroke="url(#rimGrad)" stroke-width="6"/>
+
+  <!-- 2. Cyber Sensor Scanning Grid (Subtle) -->
+  <g opacity="0.12" stroke="#475569" stroke-width="1.5">
+    <line x1="160" y1="256" x2="864" y2="256"/>
+    <line x1="160" y1="512" x2="864" y2="512"/>
+    <line x1="160" y1="768" x2="864" y2="768"/>
+    <line x1="256" y1="160" x2="256" y2="864"/>
+    <line x1="512" y1="160" x2="512" y2="864"/>
+    <line x1="768" y1="160" x2="768" y2="864"/>
+  </g>
+
+  <!-- 3. Thermal Camera Optical Aperture & Reticle Rings -->
+  <!-- Outer Aperture Ring (Dashed) -->
+  <circle cx="512" cy="512" r="416" fill="none" stroke="#334155" stroke-width="3" stroke-dasharray="16 12" opacity="0.4"/>
+  <!-- Middle Thermal Optics Ring -->
+  <circle cx="512" cy="512" r="348" fill="none" stroke="#FF6A00" stroke-width="2.5" stroke-opacity="0.3"/>
+  <!-- Cardinal Tick Marks -->
+  <line x1="512" y1="84" x2="512" y2="124" stroke="#FF6A00" stroke-width="4" stroke-linecap="round"/>
+  <line x1="512" y1="900" x2="512" y2="940" stroke="#FF6A00" stroke-width="4" stroke-linecap="round"/>
+  <line x1="84" y1="512" x2="124" y2="512" stroke="#FF6A00" stroke-width="4" stroke-linecap="round"/>
+  <line x1="900" y1="512" x2="940" y2="512" stroke="#FF6A00" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Camera Outer Corner Tech Brackets -->
+  <path d="M 120 180 L 120 120 L 180 120" stroke="#475569" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 904 180 L 904 120 L 844 120" stroke="#475569" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 120 844 L 120 904 L 180 904" stroke="#475569" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 904 844 L 904 904 L 844 904" stroke="#475569" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- 4. Thermal Heat Aura (Behind Body) -->
+  <ellipse cx="512" cy="510" rx="210" ry="330" fill="url(#thermalAura)"/>
+
+  <!-- 5. Thermal Human Silhouette -->
+  <g filter="url(#neonGlow)">
+    <!-- Head -->
+    <circle cx="512" cy="308" r="62" fill="url(#headThermal)"/>
+
+    <!-- Torso and Limbs (Stylized Human Silhouette) -->
+    <path d="
+      M 470 382
+      C 440 395, 396 425, 388 475
+      C 382 510, 400 560, 422 610
+      C 428 625, 436 655, 436 670
+      L 442 816
+      C 442 826, 452 834, 464 834
+      C 476 834, 484 826, 486 816
+      L 494 660
+      C 496 645, 510 635, 512 635
+      C 514 635, 528 645, 530 660
+      L 538 816
+      C 540 826, 548 834, 560 834
+      C 572 834, 582 826, 582 816
+      L 588 670
+      C 588 655, 596 625, 602 610
+      C 624 560, 642 510, 636 475
+      C 628 425, 584 395, 554 382
+      Z"
+      fill="url(#bodyThermal)"
+    />
+
+    <!-- Internal Heat Core Hotspot on Chest -->
+    <ellipse cx="512" cy="455" rx="55" ry="65" fill="url(#chestCore)"/>
+  </g>
+
+  <!-- 6. Central AI Target Crosshair Reticle -->
+  <circle cx="512" cy="485" r="28" fill="none" stroke="#FFD54F" stroke-width="3" stroke-dasharray="6 4" opacity="0.9"/>
+  <circle cx="512" cy="485" r="4" fill="#FFD54F"/>
+  <line x1="512" y1="440" x2="512" y2="456" stroke="#FFD54F" stroke-width="3" stroke-linecap="round"/>
+  <line x1="512" y1="514" x2="512" y2="530" stroke="#FFD54F" stroke-width="3" stroke-linecap="round"/>
+  <line x1="467" y1="485" x2="483" y2="485" stroke="#FFD54F" stroke-width="3" stroke-linecap="round"/>
+  <line x1="541" y1="485" x2="557" y2="485" stroke="#FFD54F" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 7. YOLO Detection Bounding Box -->
+  <!-- Main Bounding Box Line -->
+  <rect x="256" y="200" width="512" height="660" rx="16" fill="none" stroke="#FF6A00" stroke-width="6" stroke-opacity="0.85"/>
+
+  <!-- Thickened Corner Brackets for Object Detection Lock -->
+  <!-- Top-Left -->
+  <path d="M 256 270 L 256 200 L 326 200" fill="none" stroke="#FFD54F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top-Right -->
+  <path d="M 698 200 L 768 200 L 768 270" fill="none" stroke="#FFD54F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bottom-Left -->
+  <path d="M 256 790 L 256 860 L 326 860" fill="none" stroke="#FFD54F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bottom-Right -->
+  <path d="M 698 860 L 768 860 L 768 790" fill="none" stroke="#FFD54F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 8. YOLO Detection Badge & Text -->
+  <g>
+    <rect x="256" y="146" width="248" height="50" rx="10" fill="url(#yoloBadge)"/>
+    <!-- Small Target Icon inside badge -->
+    <circle cx="282" cy="171" r="9" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    <circle cx="282" cy="171" r="3" fill="#FFFFFF"/>
+    <!-- Badge Label -->
+    <text x="303" y="180" font-family="'JetBrains Mono', 'Segoe UI', monospace, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="1">PERSON 0.98</text>
+  </g>
+
+  <!-- 9. Cyber AI Telemetry & Thermal Spectrum Scale -->
+  <!-- Top-right LWIR sensor tag -->
+  <text x="768" y="178" text-anchor="end" font-family="'JetBrains Mono', 'Segoe UI', monospace, sans-serif" font-size="20" font-weight="700" fill="#FF7A00" letter-spacing="1">● LWIR 8-14µm</text>
+
+  <!-- Bottom AI Status Bar -->
+  <g transform="translate(256, 888)">
+    <text x="0" y="24" font-family="'JetBrains Mono', 'Segoe UI', monospace, sans-serif" font-size="20" font-weight="700" fill="#64748B" letter-spacing="1.5">YOLOv8n · AI THERMAL</text>
+    <!-- Thermal color scale strip -->
+    <rect x="360" y="8" width="24" height="18" rx="3" fill="#4F46E5"/>
+    <rect x="388" y="8" width="24" height="18" rx="3" fill="#C026D3"/>
+    <rect x="416" y="8" width="24" height="18" rx="3" fill="#FF3B30"/>
+    <rect x="444" y="8" width="24" height="18" rx="3" fill="#FF6A00"/>
+    <rect x="472" y="8" width="24" height="18" rx="3" fill="#FFD54F"/>
+    <rect x="500" y="8" width="12" height="18" rx="2" fill="#FFFFFF"/>
+  </g>
+</svg>
