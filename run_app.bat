@@ -72,11 +72,17 @@ if errorlevel 1 (
     echo.
 )
 
-:: 5. Khoi chay Streamlit Web Application
+:: 5. Khoi chay Streamlit Web Application va tu dong mo trinh duyet
 echo [*] Dang khoi chay ung dung Streamlit Web Studio...
-echo [*] Trinh duyet se tu dong mo tai dia chi: http://localhost:8501
+echo [*] Trinh duyet web se duoc tu dong mo tai dia chi: http://localhost:8501
+echo [*] Nhap Ctrl+C trong cua so nay neu muon dung ung dung.
 echo.
-python -m streamlit run app.py --server.headless=false
+
+:: Hen gio ~3 giay de server Streamlit kip khoi dong roi bat trinh duyet he thong
+start /min "" cmd /c "ping 127.0.0.1 -n 4 >nul & start http://localhost:8501"
+
+:: Chay Streamlit Web Server tren cong 8501
+python -m streamlit run app.py --server.port=8501 --server.address=localhost --server.headless=true
 
 :: 6. Xu ly sau khi ung dung dung
 if errorlevel 1 (
