@@ -1,13 +1,13 @@
 # 🎯 Thermal YOLO Vision · Phát Hiện Người Trong Ảnh Nhiệt Bằng YOLOv8
 
-[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![YOLOv8](https://img.shields.io/badge/Model-Ultralytics%20YOLOv8n-00FFFF?logo=yolo&logoColor=black)](https://github.com/ultralytics/ultralytics)
 [![Streamlit](https://img.shields.io/badge/Web%20App-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![PyTorch](https://img.shields.io/badge/Framework-PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Institution](https://img.shields.io/badge/HUTECH-Khoa%20CNTT-005696.svg)](https://www.hutech.edu.vn/)
 
-> **Đề tài:** Nghiên cứu và triển khai mô hình học sâu YOLOv8 phát hiện và định vị người đi bộ trong ảnh nhiệt (Thermal Infrared - TIR) ứng dụng cho giám sát ban đêm, xe tự hành và an ninh trong điều kiện thiếu sáng hoặc thời tiết bất lợi.
+> **Đề tài:** Nghiên cứu và triển khai mô hình học sâu YOLOv8 phát hiện và định vị người đi bộ trong ảnh nhiệt hồng ngoại sóng dài (Long-Wave Infrared - LWIR, 8–14 µm) ứng dụng cho giám sát an ninh ban đêm, giao thông đô thị và cứu nạn trong điều kiện thiếu sáng hoặc thời tiết bất lợi.
 
 ---
 
@@ -17,145 +17,155 @@
 - **Mã số sinh viên (MSSV):** 24800600314
 - **Lớp / Khóa:** Khoa Công nghệ Thông tin - Trường Đại học Công nghệ TP.HCM (HUTECH)
 - **Giảng viên hướng dẫn:** ThS./TS. Vũ Thanh Hiền
-- **Môn học:** Trí tuệ Nhân tạo (TTNT)
+- **Môn học:** Trí tuệ Nhân tạo (TTNT) · Năm thực hiện: 2026
 
 ---
 
-## 🚀 Các Tính Năng Nổi Bật
+## 🚀 Các Tính Năng Nổi Bật của Ứng Dụng
 
-1. **Nhận diện Tức Thì Không Cần Bấm Nút (Zero-Click Auto-Detection):**
-   - Tự động kích hoạt quy trình phân tích và suy luận YOLO ngay khi người dùng chọn ảnh mẫu hoặc tải ảnh nhiệt từ máy tính lên.
-
-2. **Cơ chế Phân loại & Chuyển đổi Ảnh Giả Màu Thông Minh (False-Color Handling):**
-   - Tự động nhận diện ảnh xám (Grayscale) hoặc ảnh giả màu (Inferno, Ironbow, Jet).
-   - Tự động trích xuất kênh xám chuẩn hóa trước khi đưa vào YOLO (khớp miền đặc trưng huấn luyện), sau đó tự động hiển thị bounding box phát hiện trực tiếp lên nền ảnh nhiệt màu gốc.
-
-3. **Chuyển Đổi Bảng Màu Quang Phổ Nhiệt Đa Dạng:**
-   - Hỗ trợ đổi ảnh sang nhiều bảng màu quang phổ nhiệt chuyên dụng: *Inferno (FLIR), Ironbow/Magma, Jet, Turbo, Bone military*.
-
-4. **Phòng Thí Nghiệm Kiểm Thử Độ Bền Vững (Robustness Noise Lab):**
-   - Thử nghiệm độ bền vững của mô hình trước các mức nhiễu cảm biến: *Nhiễu Gauss (Gaussian Noise), Nhiễu Muối Tiêu (Salt & Pepper), Suy giảm tương phản nhiệt (Low Thermal Contrast), Mờ nhòe do chuyển động (Thermal Blur)*.
-
-5. **Trích Xuất Chữ Ký Nhiệt Từng Người (Person Thermal Signatures):**
-   - Tự động crop từng đối tượng người phát hiện được, phân tích mức nhiệt tương đối và độ tin cậy riêng biệt.
-
----
-
-## 📊 Kết Quả Thực Nghiệm Sau 50 Epochs
-
-| Bộ dữ liệu thử nghiệm | Độ phân giải | Số tham số | Tốc độ CPU (FPS) | Precision (%) | Recall (%) | mAP@50 (%) | mAP@50-95 (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **FLIR ADAS v2** | 416 × 416 | 3.01 M | **35.1 FPS** | 71.39% | 61.94% | **67.07%** | 35.88% |
-| **LLVIP Benchmark** | 416 × 416 | 3.01 M | **35.1 FPS** | 87.21% | 85.34% | **88.52%** | 53.64% |
-
-*Kết quả cho thấy YOLOv8n hoạt động xuất sắc trên cả CPU thông thường, đạt độ trễ thấp (~28.5 ms/ảnh) đáp ứng yêu cầu giám sát thời gian thực.*
+1. **Nhận diện Tức Thì Không Cần Bấm Nút (Zero-Click Inference):**
+   - Tự động kích hoạt chu trình phân tích và suy luận YOLO ngay khi người dùng chọn ảnh mẫu hoặc tải ảnh nhiệt từ máy tính lên.
+2. **Đối Sánh Song Song Hai Mô Hình (Dual Model Comparison):**
+   - Hỗ trợ chạy độc lập và đặt cạnh nhau kết quả của mô hình **FLIR ADAS v2** (đường phố giao thông) và **LLVIP** (giám sát ban đêm) trên cùng một ảnh.
+3. **Phân Tách Rõ Ràng Ảnh Suy Luận vs Ảnh Hiển Thị (Display Only Palettes):**
+   - Ảnh nạp vào mạng YOLOv8 luôn là ảnh đơn sắc xám 3 kênh chuẩn hóa miền nhiệt, bảo toàn nguyên vẹn miền phân phối đặc trưng huấn luyện.
+   - Hỗ trợ đổi bảng màu hiển thị trực quan cho mắt người: *Inferno (FLIR), Ironbow/Magma, Jet, Turbo, Bone military*.
+4. **Đo Lường Hiệu Năng Minh Bạch:**
+   - Phân biệt rõ ràng giữa **Thời gian suy luận thuần của Model (Inference Latency & FPS)** và **Thời gian toàn chu trình (End-to-End Pipeline Latency & FPS)**.
+   - Tự động nhận diện chính xác phần cứng đang thực thi: **CPU (Intel/AMD)** hoặc **GPU CUDA**.
+5. **Phòng Thí Nghiệm Kiểm Thử Độ Bền Vững (Thermal Robustness Lab):**
+   - Kiểm chứng khả năng chịu lỗi của mô hình trước các tác nhân thực tế: *Nhiễu cảm biến vi bức xạ kế Gaussian (NETD), Điểm ảnh chết (Dead Pixels / Salt & Pepper), Mờ quang học & rung lắc, Suy giảm tương phản sương mù, Dịch chuyển bức xạ nhiệt môi trường*.
+   - Tính toán tỷ lệ duy trì phát hiện (*Retention Rate*).
+6. **Xuất Báo Cáo & Dữ Liệu:**
+   - Tải về ảnh kết quả gắn khung bounding box chất lượng cao (JPG).
+   - Tải bảng tọa độ bounding box chuẩn hóa (CSV).
+   - Trích xuất cận cảnh chữ ký nhiệt từng người (*Person Thermal Signatures Gallery*).
 
 ---
 
-## 📂 Cấu Trúc Thư Mục Dự Án
+## 📊 Kết Quả Thực Nghiệm Chính Thức Sau 50 Epochs
+
+Số liệu nghiệm thu chính thức từ file nhật ký huấn luyện `results.csv` và kiểm định độc lập trên tập test/val:
+
+| Tiêu chí Đánh giá | FLIR ADAS v2 (Xe & Người đô thị) | LLVIP (Người đi bộ đêm tối) | Mục tiêu Đề tài Đặt ra | Trạng thái Nghiệm thu |
+| :--- | :---: | :---: | :---: | :---: |
+| **Tập dữ liệu kiểm định** | Validation set (2,288 ảnh) | Test/Val set (3,463 ảnh) | Đánh giá độc lập | Khách quan |
+| **Kích thước ảnh đầu vào** | 416 × 416 pixels | 416 × 416 pixels | 416 × 416 pixels | Chuẩn mực |
+| **Độ chính xác (Precision - P)** | **78.49%** (0.7849) | **96.38%** (0.9638) | ≥ 70.00% | **Vượt chỉ tiêu** |
+| **Độ thu hồi (Recall - R)** | **58.37%** (0.5837) | **94.54%** (0.9454) | ≥ 55.00% | **Vượt chỉ tiêu** |
+| **mAP @ IoU 0.50 (mAP50)** | **67.07%** (0.6707) | **98.30%** (0.9830) | ≥ 65.00% | **Vượt chỉ tiêu** |
+| **mAP @ IoU 0.50:0.95 (mAP50-95)** | **34.26%** (0.3426) | **68.04%** (0.6804) | ≥ 30.00% | **Vượt chỉ tiêu** |
+| **Kích thước tệp trọng số (Size)** | **6.17 MB** (`flir_best.pt`) | **5.25 MB** (`llvip_best.pt`) | < 15.0 MB | **Siêu gọn nhẹ** |
+| **Số lượng tham số (Parameters)** | 3,138,003 tham số | 2,604,883 tham số | < 5.0 triệu | **Tối ưu suy luận** |
+| **Tốc độ suy luận CPU (Intel)** | ~28.5 ms (~35 FPS) | ~26.0 ms (~38 FPS) | > 25 FPS | **Thời gian thực** |
+
+---
+
+## 📂 Cấu Trúc Thư Mục Dự Án Đã Chuẩn Hóa
 
 ```text
 ThermalYoloPerson/
+│
+├── app.py                                  # Giao diện Web Application chính (Streamlit Cyber-Thermal)
+├── run_app.bat                             # File chạy nhanh ứng dụng trên Windows (tự kích hoạt .venv)
+├── requirements.txt                        # Danh sách thư viện Python cần thiết
+├── README.md                               # Tài liệu hướng dẫn sử dụng và báo cáo tổng quan
+├── .gitignore                              # Cấu hình loại trừ file rác, dataset lớn, runs
 │
 ├── configs/                                # Cấu hình dataset YAML cho YOLOv8
 │   ├── flir.yaml                           # Cấu hình dataset FLIR ADAS v2
 │   └── llvip.yaml                          # Cấu hình dataset LLVIP
 │
-├── samples/                                # Ảnh nhiệt mẫu thử nghiệm nhanh
-│   ├── flir_sample_street.jpg              # Ảnh đường phố giao thông FLIR
-│   ├── flir_sample_night.jpg               # Ảnh ban đêm FLIR
-│   ├── llvip_sample_pedestrians.jpg        # Ảnh người đi bộ LLVIP
-│   └── llvip_sample_alley.jpg              # Ảnh ngõ hẻm thiếu sáng LLVIP
+├── models/                                 # Trọng số mô hình đã huấn luyện hoàn tất
+│   ├── flir_best.pt                        # Mô hình tốt nhất trên FLIR ADAS v2 (6.17 MB)
+│   ├── llvip_best.pt                       # Mô hình tốt nhất trên LLVIP (5.25 MB)
+│   └── yolov8n.pt                          # Trọng số khởi tạo pre-trained COCO (6.55 MB)
 │
-├── app.py                                  # Giao diện Web Application (Streamlit)
-├── train_yolo.py                           # Mã nguồn huấn luyện YOLOv8
-├── prepare_yolo.py                         # Tiền xử lý dữ liệu FLIR v2 / LLVIP
-├── run_app.bat                             # File chạy nhanh Web App trên Windows
-├── requirements.txt                        # Danh sách thư viện Python cần thiết
-├── .gitignore                              # Cấu hình loại trừ file rác, dataset, runs
-├── README.md                               # Tài liệu hướng dẫn sử dụng
+├── samples/                                # Thư viện ảnh nhiệt mẫu thử nghiệm nhanh
+│   ├── flir_sample_street.jpg              # Ảnh đường phố giao thông FLIR (LWIR)
+│   ├── flir_sample_night.jpg               # Ảnh ban đêm FLIR (LWIR)
+│   ├── llvip_sample_pedestrians.jpg        # Ảnh người đi bộ LLVIP (1280×1024)
+│   └── llvip_sample_alley.jpg              # Ảnh ngõ hẻm thiếu sáng LLVIP (1280×1024)
 │
-├── Bao_Cao_De_Tai_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.docx  # Báo cáo đồ án 5 chương
-├── Thuyet_Trinh_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.pptx    # Slide thuyết trình 18 trang
-└── Noi_Dung_Slide_Thuyet_Trinh_YOLO_Anh_Nhiet.docx    # Kịch bản thuyết trình
+├── scripts/                                # Các kịch bản Python độc lập
+│   ├── prepare_yolo.py                     # Tiền xử lý dữ liệu FLIR v2 / LLVIP sang chuẩn YOLO
+│   ├── train_yolo.py                       # Huấn luyện mô hình YOLOv8 trên CPU/GPU
+│   └── evaluate_flir.py                    # Đánh giá độc lập mô hình FLIR trên tập validation
+│
+├── reports/                                # Toàn bộ hồ sơ báo cáo đề tài và tài liệu
+│   ├── Bao_cao_de_tai_YOLO_HUTECH.docx     # Báo cáo đồ án đại học HUTECH chuẩn 7 chương
+│   ├── Ly_thuyet_va_giai_thich_he_thong_YOLO.docx # Tài liệu lý thuyết và giải thích hệ thống chi tiết
+│   ├── Thuyet_Trinh_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.pptx    # Slide thuyết trình PowerPoint 16:9
+│   ├── Noi_Dung_Slide_Thuyet_Trinh_YOLO_Anh_Nhiet.docx    # Kịch bản thuyết trình chi tiết
+│   └── assets/                             # Đồ thị huấn luyện (curves), confusion matrix, icon
+│
+├── prepared_dataset/                       # Dữ liệu ảnh nhiệt đã chuẩn hóa tọa độ YOLO
+│   ├── flir/                               # Tập images và labels (train/val) FLIR
+│   └── llvip/                              # Tập images và labels (train/val/test) LLVIP
+│
+└── runs/                                   # Chi tiết tiến trình huấn luyện và checkpoint gốc
+    ├── flir_yolov8n_cpu/                   # Kết quả huấn luyện 50 epochs FLIR (results.csv, curves)
+    ├── llvip_yolov8n_cpu/                  # Kết quả huấn luyện LLVIP (weights/best.pt)
+    └── evaluation/                         # Kết quả đánh giá độc lập (flir_val curves)
 ```
 
 ---
 
-## 🛠️ Hướng Dẫn Cài Đặt & Sử Dụng
+## 🛠️ Hướng Dẫn Cài Đặt & Chạy Ứng Dụng
 
 ### 1. Yêu Cầu Môi Trường
-- Python 3.10, 3.11 hoặc 3.12.
-- Hệ điều hành: Windows, macOS hoặc Linux.
+- **Hệ điều hành:** Windows 10/11, macOS hoặc Linux.
+- **Python:** Python 3.10 – 3.14 (Khuyến nghị dùng môi trường ảo `.venv`).
 
-### 2. Cài Đặt Thư Viện
-Clone repository về máy tính và cài đặt các thư viện phụ thuộc:
+### 2. Khởi Động Nhanh Trên Windows (Khuyên Dùng)
+Chỉ cần **bấm đúp chuột vào file `run_app.bat`** tại thư mục gốc `ThermalYoloPerson/` (hoặc tại thư mục cha `TTNT/`).
+File script sẽ tự động:
+1. Chuyển thư mục làm việc về đúng thư mục dự án.
+2. Kiểm tra và kích hoạt môi trường ảo `.venv` (nếu có).
+3. Kiểm tra tính khả dụng của Python và thư viện Streamlit.
+4. Tự động mở trình duyệt web tại địa chỉ: `http://localhost:8501`.
+5. Nếu có lỗi, script sẽ giữ cửa sổ terminal và hiển thị hướng dẫn khắc phục chi tiết.
 
+### 3. Khởi Động Bằng Dòng Lệnh Thủ Công
 ```bash
-# 1. Clone repository
-git clone https://github.com/11Hiu2k5/ThermalYoloPerson.git
+# 1. Di chuyển vào thư mục dự án
 cd ThermalYoloPerson
 
-# 2. Tạo môi trường ảo (khuyến nghị)
-python -m venv .venv
-
-# 3. Kích hoạt môi trường ảo:
+# 2. Kích hoạt môi trường ảo (nếu có)
 # Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
 # Windows Command Prompt:
 .\.venv\Scripts\activate.bat
-# Linux / macOS:
-source .venv/bin/activate
 
-# 4. Cài đặt các gói phụ thuộc
-pip install -r requirements.txt
+# 3. Chạy ứng dụng Streamlit
+python -m streamlit run app.py
 ```
-
-### 3. Chạy Ứng Dụng Web Demo
-Bạn có thể khởi động giao diện Streamlit bằng 1 trong 2 cách:
-
-- **Cách 1 (Nhanh nhất trên Windows):** Click đúp vào file `run_app.bat`.
-- **Cách 2 (Bằng dòng lệnh):**
-  ```bash
-  streamlit run app.py
-  ```
-Trình duyệt sẽ tự động mở trang web tại địa chỉ: `http://localhost:8501`.
 
 ---
 
-## 🧠 Huấn Luyện Mô Hình (Google Colab / Local GPU)
+## 🔬 Kịch Bản Kiểm Thử & Huấn Luyện Thêm
 
-> **Lưu ý về Dataset:** Do kích thước của bộ dữ liệu FLIR ADAS v2 và LLVIP khá lớn (hơn 10GB), toàn bộ dataset được lưu trữ riêng trên **Google Drive** để tiện huấn luyện với GPU Tesla T4/A100 trên **Google Colab**, không upload trực tiếp lên repository GitHub.
-
-### 1. Chuẩn bị cấu trúc dữ liệu YOLO
-Chạy script tiền xử lý để chuyển đổi nhãn COCO JSON / Pascal VOC XML sang định dạng YOLO TXT:
+### 1. Đánh giá độc lập mô hình FLIR
 ```bash
-python prepare_yolo.py
+python scripts/evaluate_flir.py
 ```
 
-### 2. Khởi chạy huấn luyện
-Huấn luyện YOLOv8n trên bộ dữ liệu mong muốn:
+### 2. Huấn luyện lại hoặc Fine-tune tiếp tục
 ```bash
-# Huấn luyện trên dataset LLVIP (50 epochs)
-python train_yolo.py --dataset llvip --epochs 50 --batch 16 --device auto
+# Huấn luyện trên dataset FLIR ADAS v2
+python scripts/train_yolo.py --dataset flir --epochs 50 --batch 4 --imgsz 416
 
-# Huấn luyện trên dataset FLIR ADAS v2 (50 epochs)
-python train_yolo.py --dataset flir --epochs 50 --batch 16 --device auto
+# Huấn luyện trên dataset LLVIP
+python scripts/train_yolo.py --dataset llvip --epochs 50 --batch 4 --imgsz 416
+
+# Tiếp tục huấn luyện từ checkpoint gần nhất:
+python scripts/train_yolo.py --dataset flir --resume
 ```
 
-Trọng số tối ưu sau khi huấn luyện sẽ được lưu tại thư mục `runs/<dataset>_yolov8n_<device>/weights/best.pt`.
-
 ---
 
-## 📄 Tài Liệu Báo Cáo & Thuyết Trình Đi Kèm
+## 📜 Tài Liệu Tham Khảo Khoa Học
 
-- **Báo cáo đồ án toàn văn:** `Bao_Cao_De_Tai_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.docx` (Chi tiết cơ sở lý thuyết, kiến trúc YOLOv8, phương pháp thực nghiệm và đánh giá định lượng).
-- **Slide thuyết trình PowerPoint:** `Thuyet_Trinh_YOLO_Anh_Nhiet_Nguyen_Duc_Hieu.pptx` (18 slide chuẩn 16:9, tích hợp hình minh họa độ nét cao và ghi chú thuyết trình, sẵn sàng kéo thả vào Canva).
-
----
-
-## 📜 Tài Liệu Tham Khảo
-
-1. Ultralytics YOLOv8 Documentation: [https://docs.ultralytics.com/](https://docs.ultralytics.com/)
-2. FLIR Thermal Dataset: [https://www.mdpi.com/1424-8220/22/14/5351](https://www.mdpi.com/1424-8220/22/14/5351)
-3. LLVIP Dataset for Low-light Vision: [https://dl.acm.org/doi/abs/10.1145/3323933.3324076](https://dl.acm.org/doi/abs/10.1145/3323933.3324076)
+1. **MDPI Sensors (2022):** *"Thermal Image Person Detection Using Deep Learning"*, Sensors 2022, 22(14), 5351. [DOI: 10.3390/s22145351](https://www.mdpi.com/1424-8220/22/14/5351)
+2. **ACM Digital Library (2019):** *"Infrared Pedestrian Detection in Low-Light Conditions"*, ACM Multimedia 2019. [DOI: 10.1145/3323933.3324076](https://dl.acm.org/doi/abs/10.1145/3323933.3324076)
+3. **Ultralytics YOLOv8 Documentation:** [https://docs.ultralytics.com/](https://docs.ultralytics.com/)

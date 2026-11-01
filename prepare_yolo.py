@@ -6,6 +6,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+if ROOT.name == "scripts":
+    ROOT = ROOT.parent
 OUT = ROOT / "prepared_dataset"
 SEED = 42
 

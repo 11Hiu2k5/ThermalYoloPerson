@@ -5,6 +5,8 @@ import torch
 from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parent
+if ROOT.name == "scripts":
+    ROOT = ROOT.parent
 
 
 def main():
@@ -101,7 +103,13 @@ def main():
     print(f"Run name: {run_name}")
     print("=" * 60)
 
-    model = YOLO("yolov8n.pt")
+    pretrained_model = ROOT / "models" / "yolov8n.pt"
+    if not pretrained_model.exists():
+        pretrained_model = ROOT / "yolov8n.pt"
+    if not pretrained_model.exists():
+        pretrained_model = "yolov8n.pt"
+
+    model = YOLO(str(pretrained_model))
     model.train(
         data=str(data_yaml),
         device=device,
