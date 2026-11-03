@@ -16,7 +16,7 @@
 - **Sinh viên thực hiện:** Nguyễn Đức Hiếu
 - **Mã số sinh viên (MSSV):** 24800600314
 - **Lớp / Khóa:** Khoa Công nghệ Thông tin - Trường Đại học Công nghệ TP.HCM (HUTECH)
-- **Giảng viên hướng dẫn:** ThS./TS. Vũ Thanh Hiền
+- **Giảng viên hướng dẫn:** Vũ Thanh Hiền
 - **Môn học:** Trí tuệ Nhân tạo (TTNT) · Năm thực hiện: 2026
 
 ---
